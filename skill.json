@@ -1,0 +1,68 @@
+{
+  "name": "genpark-enterprise-knowledge-graph-provenance-tracer-skill",
+  "version": "1.0.0",
+  "description": "Enterprise Knowledge Graph Provenance & Anti-Hallucination Tracer (inspired by Tencent Docs, Meeting & Enterprise Knowledge Bases). Provides cryptographic chunk hashing, reverse claim-to-source attribution, clearance boundary validation, and provenance audit trails.",
+  "tools": [
+    {
+      "name": "trace_knowledge_provenance",
+      "description": "Trace enterprise claim attribution to cryptographic document sources, verify clearance boundaries, and validate fact provenance.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "index_knowledge_chunk",
+              "trace_claim_provenance",
+              "verify_lineage_clearance",
+              "audit_provenance_token",
+              "get_provenance_stats"
+            ],
+            "description": "Provenance tracing action."
+          },
+          "doc_id": {
+            "type": "string",
+            "description": "Document ID (e.g. Tencent Doc or Meeting minutes ID)."
+          },
+          "chunk_id": {
+            "type": "string",
+            "description": "Unique chunk identifier."
+          },
+          "content": {
+            "type": "string",
+            "description": "Source text content."
+          },
+          "classification": {
+            "type": "string",
+            "enum": [
+              "PUBLIC",
+              "INTERNAL",
+              "CONFIDENTIAL",
+              "RESTRICTED"
+            ],
+            "description": "Data classification level."
+          },
+          "author": {
+            "type": "string",
+            "description": "Chunk author or system creator."
+          },
+          "claim_text": {
+            "type": "string",
+            "description": "Agent-generated claim or conclusion to fact-verify against source index."
+          },
+          "requester_role": {
+            "type": "string",
+            "description": "Role of the user/agent requesting provenance verification."
+          },
+          "provenance_token": {
+            "type": "string",
+            "description": "Signed token string to verify tamper-proof status."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}
